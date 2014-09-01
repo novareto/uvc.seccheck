@@ -28,9 +28,9 @@ class PageRequireGrokker(CheckRequireGrokker):
     martian.component(uvcsite.Page)
 
 
-class PageRequireGrokker(CheckRequireGrokker):
+class TablePageRequireGrokker(CheckRequireGrokker):
     martian.component(uvcsite.TablePage)
 
 
-class PageRequireGrokker(CheckRequireGrokker):
+class FormRequireGrokker(CheckRequireGrokker):
     martian.component(uvcsite.Form)
