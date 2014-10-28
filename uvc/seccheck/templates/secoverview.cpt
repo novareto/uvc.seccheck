@@ -1,0 +1,22 @@
+<h1> Sicherheitsmatrix </h1>
+
+<p> Diese Sicherheitsmatrix bezieht sich auf das Object: 
+<span tal:content="context"> </span> 
+<span tal:content="context.__class__"> </span>
+</p>
+
+
+<table class="table table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th> Views </th>
+      <th> Permissions </th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr tal:repeat="page view.views.values()">
+    <td tal:content="structure view.getName(page)"> </td> 
+    <td tal:content="view.getPermission(page)"> </td>  
+  </tr>
+  </tbody>
+</table>
