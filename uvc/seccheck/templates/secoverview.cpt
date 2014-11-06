@@ -1,22 +1,54 @@
-<h1> Sicherheitsmatrix </h1>
+<div id="security-content">
+  <h1> Sicherheitsmatrix </h1>
+  <p>
+    Diese Sicherheitsmatrix bezieht sich auf das Object: 
+    <span tal:content="context"> </span> 
+    <span tal:content="context.__class__"> </span>
+  </p>
 
-<p> Diese Sicherheitsmatrix bezieht sich auf das Object: 
-<span tal:content="context"> </span> 
-<span tal:content="context.__class__"> </span>
-</p>
+  <h2>Specific Views</h2>
+ <table class="table table-condensed table-bordered"
+	 tal:define="pages view.views.values(); users sorted(view.users)">
+    <tbody>
+      <tr>
+	<td>&nbsp;</td>
+	<td tal:repeat="user users" tal:content="user" />
+      </tr>
+      <tr tal:repeat="page pages">
+	<td tal:content="structure view.getName(page) or 'NO NAME'" />
+	<td tal:repeat="user users">
+	  <tal:perm define="allowance view.getAllowance(user, page)">
+	    <dl>
+	      <dt tal:content="allowance['permission']" />
+	      <dd tal:attributes="class allowance['access'] and 'bg-success' or 'bg-danger'"
+		  tal:content="allowance['access'] and 'Access' or 'No Access'" />
+	    </dl>
+	  </tal:perm>
+	</td>
+      </tr>
+    </tbody>
+  </table>
 
-
-<table class="table table-condensed table-bordered">
-  <thead>
-    <tr>
-      <th> Views </th>
-      <th> Permissions </th>
-    </tr>
-  </thead>
-  <tbody>
-  <tr tal:repeat="page view.views.values()">
-    <td tal:content="structure view.getName(page)"> </td> 
-    <td tal:content="view.getPermission(page)"> </td>  
-  </tr>
-  </tbody>
-</table>
+  <h2>Generic Views</h2>
+  <table class="table table-condensed table-bordered"
+	 tal:define="pages view.generic.values(); users view.users">
+    <tbody>
+      <tr>
+	<td>&nbsp;</td>
+	<td tal:repeat="user users" tal:content="user" />
+      </tr>
+      <tr tal:repeat="page pages">
+	<td tal:content="structure view.getName(page) or 'NO NAME'" />
+	<td tal:repeat="user users">
+	  <tal:perm define="allowance view.getAllowance(user, page)">
+	    <dl>
+	      <dt tal:content="allowance['permission']" />
+	      <dd tal:attributes="class allowance['access'] and 'bg-success' or 'bg-danger'"
+		  tal:content="allowance['access'] and 'Access' or 'No Access'" />
+	    </dl>
+	  </tal:perm>
+	</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
